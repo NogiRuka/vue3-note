@@ -4,7 +4,8 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "strict": true,
     "jsx": "preserve",
     "resolveJsonModule": true,
@@ -17,11 +18,15 @@
       "@/*": ["./src/*"]
     },
     "types": [
+      "@vueuse/core",
+      "node",
+      "pinia",
       "vite/client",
       "vite-plugin-pwa/client",
-      "vite-plugin-pwa/info"
+      "vite-plugin-pwa/info", 
+      "vue"
     ],
-    "lib": ["ES2015", "DOM", "DOM.Iterable", "WebWorker"]
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"]
   },
   "references": [
     {

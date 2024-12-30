@@ -4,6 +4,9 @@ import App from './App.vue'
 
 import 'virtual:uno.css'
 import { registerSW } from 'virtual:pwa-register'
+import { pwaInfo } from 'virtual:pwa-info'
+
+console.log(pwaInfo)
 
 // PWA更新提示
 const updateSW = registerSW({
