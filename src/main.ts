@@ -5,13 +5,16 @@ import App from './App.vue'
 import 'virtual:uno.css'
 import { registerSW } from 'virtual:pwa-register'
 
+// PWA更新提示
 const updateSW = registerSW({
   onNeedRefresh() {
-    // 可以在这里添加更新提示UI
+    if (confirm('有新版本可用，是否更新？')) {
+      updateSW()
+    }
   },
   onOfflineReady() {
-    // 可以在这里添加离线就绪提示UI
-  },
+    console.log('应用已可离线使用')
+  }
 })
 
 const app = createApp(App)

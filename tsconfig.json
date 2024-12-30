@@ -18,9 +18,10 @@
     },
     "types": [
       "vite/client",
-      "vite-plugin-pwa/client"
+      "vite-plugin-pwa/client",
+      "vite-plugin-pwa/info"
     ],
-    "lib": ["ES2015", "DOM", "DOM.Iterable"]
+    "lib": ["ES2015", "DOM", "DOM.Iterable", "WebWorker"]
   },
   "references": [
     {
