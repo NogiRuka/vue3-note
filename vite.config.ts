@@ -12,21 +12,28 @@ export default defineConfig(({ mode }) => ({
     vue(),
     UnoCSS(),
     VitePWA({
+      base: '/',
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        enabled: true,
+        navigateFallback: 'index.html',
+        suppressWarnings: true,
       },
       manifest: {
-        name: 'Nogi no Notes',
-        short_name: 'Notes',
+        name: 'Nogi Notes',
+        short_name: 'Nogi Notes',
         description: 'A simple note-taking app',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '/',
         icons: [
           {
             src: '/pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
