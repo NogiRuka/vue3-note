@@ -17,13 +17,13 @@ export default defineConfig(({ mode }) => ({
         enabled: true
       },
       manifest: {
-        name: 'Vue Notes',
+        name: 'Nogi no Notes',
         short_name: 'Notes',
         description: 'A simple note-taking app',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '/vue3-note/',
+        start_url: '/',
         icons: [
           {
             src: '/pwa-192x192.png',
