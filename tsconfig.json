@@ -18,12 +18,9 @@
     },
     "types": [
       "vite/client",
-      "vite-plugin-pwa/client",
-      "workbox-window",
-      "vite-plugin-pwa/info",
-      "vite-plugin-pwa/vue"
+      "vite-plugin-pwa/client"
     ],
-    "lib": ["ES2015","ESNext", "DOM", "DOM.Iterable", "WebWorker", "WebWorker.ImportScripts"]
+    "lib": ["ES2015", "DOM", "DOM.Iterable"]
   },
   "references": [
     {
