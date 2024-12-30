@@ -18,9 +18,7 @@
     },
     "types": [
       "vite/client",
-      "vite-plugin-pwa/client",
-      "workbox-window",
-      "@vite-pwa/assets-generator"
+      "vite-plugin-pwa/client"
     ],
     "lib": ["ES2015", "DOM", "DOM.Iterable", "WebWorker"]
   },
