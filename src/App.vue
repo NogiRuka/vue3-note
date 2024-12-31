@@ -59,7 +59,7 @@ function handleNoteDelete(id: string) {
                 @input="selectedNote.updateTitle(selectedNote.title)"
               >
               <button
-                class="btn bg-red-500 hover:bg-red-600"
+                class="px-4 py-2 rounded-lg text-white transition-colors bg-red-500 hover:bg-red-600"
                 @click="selectedNote.delete()"
               >
                 删除
@@ -70,7 +70,7 @@ function handleNoteDelete(id: string) {
               @update:modelValue="selectedNote.updateContent"
             />
           </div>
-          <div v-else class="bg-white rounded-lg shadow p-4 h-[calc(100vh-4rem)] flex-center text-gray-400">
+          <div v-else class="bg-white rounded-lg shadow p-4 h-[calc(100vh-4rem)] flex items-center justify-center text-gray-400">
             选择或创建一个笔记开始
           </div>
         </div>
@@ -81,10 +81,10 @@ function handleNoteDelete(id: string) {
 
 <style>
 .btn {
-  @apply px-4 py-2 rounded-lg text-white transition-colors;
-}
-
-.flex-center {
-  @apply flex items-center justify-center;
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: white;
+  transition: all 0.2s;
 }
 </style>
