@@ -1,73 +1,82 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMediaQuery } from '@vueuse/core'
 import { useNotesStore } from './stores/notes'
-import type { Note } from './types/note'
 import NoteList from './components/NoteList.vue'
 import NoteEditor from './components/NoteEditor.vue'
+import { storeToRefs } from 'pinia'
+import type { Note } from './types/note'
+import { computed } from 'vue'
 
 const notesStore = useNotesStore()
-const { notes } = storeToRefs(notesStore)
-const isLargeScreen = useMediaQuery('(min-width: 1024px)')
-const selectedNote = ref<Note | null>(null)
-const showEditor = ref(false)
+const { notes, selectedNoteId } = storeToRefs(notesStore)
+const selectedNote = computed(() => notesStore.getSelectedNote())
 
-function createNewNote() {
-  const note = {
-    title: '新笔记',
-    content: ''
-  }
-  notesStore.addNote(note)
-  selectedNote.value = notes.value[notes.value.length - 1]
-  showEditor.value = true
+function handleNoteSelect(note: Note) {
+  notesStore.selectNote(note.id)
 }
 
-function selectNote(note: Note) {
-  selectedNote.value = note
-  if (!isLargeScreen.value) {
-    showEditor.value = true
-  }
+function handleNoteCreate() {
+  notesStore.createNote()
 }
 
-function updateCurrentNote(updates: Partial<Note>) {
-  if (selectedNote.value) {
-    notesStore.updateNote(selectedNote.value.id, updates)
-  }
+function handleNoteUpdate(id: string, content: string) {
+  notesStore.updateNote(id, {
+    content,
+    html: content
+  })
 }
 
-function deleteCurrentNote() {
-  if (selectedNote.value) {
-    notesStore.deleteNote(selectedNote.value.id)
-    selectedNote.value = null
-    showEditor.value = false
-  }
+function handleNoteDelete(id: string) {
+  notesStore.deleteNote(id)
 }
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-100">
-    <div class="container mx-auto px-4 py-8">
-      <div class="grid gap-4" :class="isLargeScreen ? 'grid-cols-[300px_1fr]' : 'grid-cols-1'">
-        <NoteList
-          v-show="!showEditor || isLargeScreen"
-          :notes="notes"
-          :selected-note-id="selectedNote?.id"
-          :on-select="selectNote"
-          :on-create-note="createNewNote"
-        />
-        <NoteEditor
-          v-show="showEditor || isLargeScreen"
-          :note="selectedNote"
-          :show-back-button="!isLargeScreen"
-          :on-update="updateCurrentNote"
-          :on-delete="deleteCurrentNote"
-          :on-back="() => showEditor = false"
-        />
+    <div class="container mx-auto p-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="md:col-span-1">
+          <NoteList
+            :notes="notes"
+            :selectedNoteId="selectedNoteId"
+            :onSelect="handleNoteSelect"
+            :onCreate="handleNoteCreate"
+          />
+        </div>
+        <div class="md:col-span-2">
+          <div v-if="selectedNote" class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center mb-4">
+              <input
+                v-model="selectedNote.title"
+                class="text-2xl font-bold bg-transparent border-none focus:outline-none flex-1"
+                @input="notesStore.updateNote(selectedNote.id, { title: selectedNote.title })"
+              >
+              <button
+                class="btn bg-red-500 hover:bg-red-600"
+                @click="handleNoteDelete(selectedNote.id)"
+              >
+                删除
+              </button>
+            </div>
+            <NoteEditor
+              v-model="selectedNote.content"
+              @update:modelValue="(content) => handleNoteUpdate(selectedNote.id, content)"
+            />
+          </div>
+          <div v-else class="bg-white rounded-lg shadow p-4 h-[calc(100vh-4rem)] flex-center text-gray-400">
+            选择或创建一个笔记开始
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style>
+.btn {
+  @apply px-4 py-2 rounded-lg text-white transition-colors;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
 </style>
