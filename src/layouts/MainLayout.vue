@@ -5,13 +5,13 @@ defineSlots<{
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <header class="bg-white shadow-sm">
+  <div class="h-screen flex flex-col bg-gray-50 overflow-hidden">
+    <header class="bg-white shadow-sm flex-none">
       <div class="container mx-auto px-4 py-3">
         <h1 class="text-2xl font-bold text-gray-800">Vue Notes</h1>
       </div>
     </header>
-    <main class="container mx-auto p-4">
+    <main class="flex-1 container mx-auto p-4 overflow-hidden">
       <slot />
     </main>
   </div>
