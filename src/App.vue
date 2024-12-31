@@ -51,7 +51,7 @@ function handleNoteDelete(id: string) {
           />
         </div>
         <div class="md:col-span-2">
-          <div v-if="selectedNote" class="bg-white rounded-lg shadow p-4">
+          <div v-if="selectedNote" class="bg-white rounded-lg shadow p-4 h-[calc(100vh-4rem)]">
             <div class="flex justify-between items-center mb-4">
               <input
                 v-model="selectedNote.title"

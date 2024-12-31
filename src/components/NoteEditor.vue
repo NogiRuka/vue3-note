@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="note-editor h-[calc(100vh-12rem)]">
+  <div class="note-editor">
     <editor-content :editor="editor" class="h-full p-4 border rounded-lg overflow-y-auto" />
   </div>
 </template>
