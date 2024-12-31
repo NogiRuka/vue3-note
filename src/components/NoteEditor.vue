@@ -59,8 +59,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="note-editor">
-    <editor-content :editor="editor" class="min-h-[200px] p-4 border rounded-lg" />
+  <div class="note-editor h-[calc(100vh-12rem)]">
+    <editor-content :editor="editor" class="h-full p-4 border rounded-lg overflow-y-auto" />
   </div>
 </template>
 
@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
 }
 
 .ProseMirror {
-  @apply min-h-[200px] outline-none;
+  @apply h-full outline-none;
 }
 
 .ProseMirror p.is-editor-empty:first-child::before {
